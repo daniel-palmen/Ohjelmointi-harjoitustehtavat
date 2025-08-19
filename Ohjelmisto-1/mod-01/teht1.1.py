@@ -1,1 +1,1 @@
-print("Hei Daniel Palmen")
+print('hei Daniel Palmen')
