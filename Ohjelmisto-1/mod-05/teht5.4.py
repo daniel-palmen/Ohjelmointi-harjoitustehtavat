@@ -4,7 +4,7 @@ Maara  = 5
 Flare = 5
 Lista = []
 
-for n in range(5):
+for n in range(Maara):
     if Flare == 1:
         Kpnk = input(f'Anna {Flare}. kaupungin nimi: ')
         Lista.append(Kpnk)
