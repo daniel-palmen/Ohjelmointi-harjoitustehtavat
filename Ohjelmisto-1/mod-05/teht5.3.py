@@ -6,7 +6,6 @@ n = 0
 
 for n in x:
     n = n + 1
-    print(n)
     Jj = Luku % n
     if Jj == 0:
         Testi = Testi + 1
