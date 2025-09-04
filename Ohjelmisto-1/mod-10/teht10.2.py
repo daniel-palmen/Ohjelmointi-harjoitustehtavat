@@ -26,29 +26,33 @@ class hissi:
     def kerros_alas(self):
         self.nykyinenKerros = self.nykyinenKerros - 1
         print(f'Nykyinen Kerros {self.nykyinenKerros}')
+
 class talo:
-    def __init__(self, alinKerros, ylinKerros, hissit):
+    def __init__(self, alinKerros, ylinKerros):
         self.alinKerros = alinKerros
         self.ylinKerros = ylinKerros
         self.hissit = []
     def __str__(self):
         return (f'Alin kerros:{self.alinKerros} Ylin kerros:{self.ylinKerros} Hissit:{self.hissit}')
     def aja_hissiä (self, hissiNro, muutos):
+        if muutos == self.hissit[hissiNro].nykyinenKerros:
+            print(f'Hissi numero {hissiNro} on jo kerroksessa {muutos}.')
+            return
+        print(f'Hissi numero {hissiNro} liikkuu.')
         self.hissit[hissiNro].siirry_kerrokseen(muutos)
     def palohälytys (self):
-        for i in self.hissit:
-            while self.hissit[i].NykyinenKerros != self.alinKerros: #EI TOIMI
-                muutos = -10
-                muutos = muutos - 10
-                self.aja_hissiä(i, muutos)
+        print(f'Palohälytys! hissit liikkuvat alimpaan kerrokseen.')
+        for i in range(len(self.hissit)):
+            muutos = self.hissit[i].alinKerros  #toimii myös self.alinKerros eli talon alin kerros
+            self.aja_hissiä(i, muutos)
 
 alinKerros = 0
 ylinKerros = 10
 hissienMaara = 3
 
-talo1 = talo(alinKerros, ylinKerros,0)
+talo1 = talo(alinKerros, ylinKerros)
 for i in range(0, hissienMaara):
-    i = hissi(alinKerros, ylinKerros, 0)
+    i = hissi(alinKerros, ylinKerros, alinKerros)
     talo1.hissit.append(i)
 
 hissiNro = 0
@@ -62,5 +66,6 @@ for i in range(0,hissienMaara):
 
 talo1.palohälytys()
 
+#Testi
 for i in range(0, hissienMaara):
     print(talo1.hissit[i])
