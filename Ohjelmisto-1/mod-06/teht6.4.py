@@ -10,6 +10,5 @@ print('Anna 5 lukua: ')
 while len(lista) < 5:
     Luku = float(input())
     lista.append(Luku)
-if len(lista) == 5:
-    Summa = summain(lista)
-    print(f'Lukujen summa on {Summa}')
+Summa = summain(lista)
+print(f'Lukujen summa on {Summa}')
