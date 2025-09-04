@@ -15,13 +15,13 @@ class auto:
     def kulje(self, aika):
         kuljettuMatka = self.tamanhetkinenNopeus * aika
         self.kuljettuMatka = self.kuljettuMatka + kuljettuMatka
-Auto = auto('ABC-123', 142, 0, 0)
-print(Auto)
-Auto.kiihdyta(30)
-Auto.kiihdyta(70)
-Auto.kiihdyta(50)
-print(Auto.tamanhetkinenNopeus)
-Auto.kulje(1)
-Auto.kiihdyta(-200)
-print(Auto.tamanhetkinenNopeus)
-print(Auto)
+auto = auto('ABC-123', 142, 0, 0)
+print(auto)
+auto.kiihdyta(30)
+auto.kiihdyta(70)
+auto.kiihdyta(50)
+print(auto.tamanhetkinenNopeus)
+auto.kulje(1)
+auto.kiihdyta(-200)
+print(auto.tamanhetkinenNopeus)
+print(auto)

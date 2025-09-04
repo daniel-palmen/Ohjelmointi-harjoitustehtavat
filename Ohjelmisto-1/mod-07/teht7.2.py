@@ -1,14 +1,14 @@
-Nimet = set()
-Nimi = str
-while Nimi != '':
-    Nimi = input('Syötä nimi (tyhjä lopettaa): ')
-    if Nimi == '':
+nimet = set()
+nimi = str
+while nimi != '':
+    nimi = input('Syötä nimi (tyhjä lopettaa): ')
+    if nimi == '':
         break
-    elif Nimi in Nimet:
+    elif nimi in nimet:
         print('Aiemmin syötetty nimi')
-    elif Nimi not in Nimet:
+    elif nimi not in nimet:
         print('Uusi Nimi')
-        Nimet.add(Nimi)
+        nimet.add(nimi)
 
-for i in Nimet:
+for i in nimet:
     print(i)

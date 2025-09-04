@@ -17,22 +17,22 @@ class auto:
         kuljettuMatka = self.tamanhetkinenNopeus * aika
         self.kuljettuMatka = self.kuljettuMatka + kuljettuMatka
 
-AutojenMaara = 10
-Maali = 10000
-Lopetus = 0
-Lista = []
-for i in range(0, AutojenMaara):
-    Huippu = random.randint(100,200)
+autojenMaara = 10
+maali = 10000
+lopetus = 0
+lista = []
+for i in range(0, autojenMaara):
+    huippu = random.randint(100,200)
     rekisteri = 'ABC-{0}'.format(i + 1)
-    Lista.append(auto(rekisteri, Huippu, 0, 0))
-print(Lista[0].huippunopeus)
-while Lopetus == 0:
-    for i in range(0, AutojenMaara):
+    lista.append(auto(rekisteri, huippu, 0, 0))
+print(lista[0].huippunopeus)
+while lopetus == 0:
+    for i in range(0, autojenMaara):
         muutos = random.randint(-10, 15)
-        Lista[i].kiihdyta(muutos)
-        Lista[i].kulje(1)
-        if Lista[i].kuljettuMatka >= Maali:
-            print(f'Auto {Lista[i].rekisteri} voitti kisan.')
-            Lopetus = 1
-for i in range(0, AutojenMaara):
-    print(Lista[i])
+        lista[i].kiihdyta(muutos)
+        lista[i].kulje(1)
+        if lista[i].kuljettuMatka >= maali:
+            print(f'Auto {lista[i].rekisteri} voitti kisan.')
+            lopetus = 1
+for i in range(0, autojenMaara):
+    print(lista[i])
