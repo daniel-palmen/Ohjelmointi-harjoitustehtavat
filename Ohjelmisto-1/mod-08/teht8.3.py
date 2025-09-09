@@ -1,5 +1,5 @@
 import mysql.connector
-from geopy.distance import geodesic
+from geopy import distance
 
 yhteys = mysql.connector.connect(
         host = '127.0.0.1',
@@ -24,6 +24,6 @@ kursori = yhteys.cursor()
 kursori.execute(sql)
 kenttaB = kursori.fetchall()
 
-etaisyys = geodesic(kenttaA, kenttaB).kilometers
+etaisyys = distance.distance(kenttaA, kenttaB).kilometers
 
 print(f'Lentokenttien etäisyys on {etaisyys:.0f}km')
