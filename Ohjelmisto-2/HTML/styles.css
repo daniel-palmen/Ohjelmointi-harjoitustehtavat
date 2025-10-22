@@ -1,0 +1,14 @@
+
+h1{
+    text-align:center; 
+    color: red;
+    background-color:aquamarine;
+}
+h2{
+    text-align:center;
+}
+body{
+    text-align:center;
+    font: 1.2em sans-serif;
+    background-color:gray;
+}
