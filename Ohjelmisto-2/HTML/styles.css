@@ -53,6 +53,7 @@ a:hover{
 .content{
     background-clip: content-box;
     background-color: rgb(160, 160, 160);
+    border-radius: 10px;
 }
 .textblock{
     text-align:center;
