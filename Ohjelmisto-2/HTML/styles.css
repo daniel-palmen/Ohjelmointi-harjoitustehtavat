@@ -1,14 +1,34 @@
-
-h1{
-    text-align:center; 
-    color: red;
-    background-color:aquamarine;
-}
 h2{
     text-align:center;
 }
 body{
-    text-align:center;
     font: 1.2em sans-serif;
     background-color:gray;
+    padding-left:100px;
+    padding-right:100px
+}
+.logo{
+    display:block;
+    width:130px;
+    height:auto;
+}
+.image1{
+    display:block;
+    margin:0 auto;
+}
+.navbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background-color: blue;
+}
+.nav_links{
+    list-style:none;
+    display:flex;
+    gap: 20px;
+    color: white;
+    padding-right: 0.5em;
+}
+.textblock{
+    text-align:center;
 }
