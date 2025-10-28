@@ -1,9 +1,15 @@
+
+@font-face {
+      font-family: 'Roboto Condensed';
+      src: url(Roboto_Condensed-Regular.ttf) format('truetype');
+    }
 body{
-    font: 1.2em sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     background-color:rgb(100, 100, 100);
     padding-left:5%;
     padding-right:5%;
     box-sizing: border-box;
+    font-size:1.2em;
 }
 a{
     color: white;
@@ -83,6 +89,7 @@ a:hover{
     background-color: rgb(200, 200, 200);
     padding:20px;
     box-sizing: border-box;
+    border-radius:10px;
 }
 .img-box{
     max-width: 100%;
