@@ -13,3 +13,9 @@ const students = [
     id: '5423679',
   },
 ];
+const paikka = document.getElementById('target');
+for(let i=0;i<students.length;i++){
+  let opt = document.createElement('option');
+  opt.textContent =`value=${students[i].id}>${students[i].name}<`;
+  paikka.appendChild(opt);
+}

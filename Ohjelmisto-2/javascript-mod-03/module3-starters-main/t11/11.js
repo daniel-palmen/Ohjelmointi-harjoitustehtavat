@@ -95,13 +95,15 @@ const picArray = [
 // add your code here
 const paikka = document.getElementById('pictures');
 for(let i=0;i<picArray.length;i++){
-  paikka.innerHTML = paikka.innerHTML+`
-  <article class="card">
+  let article = document.createElement('article');
+  article.classList.add('card');
+  article.innerHTML =`
    <h2>${picArray[i].title}</h2>
    <figure>
       <img src=${picArray[i].image.medium} alt=${picArray[i].title}>
       <figcaption>${picArray[i].caption}</figcaption>
    </figure>
    <p>${picArray[i].description}</p>
-  </article>`
+  </article>`;
+  paikka.appendChild(article);
 }
