@@ -1,0 +1,12 @@
+'use strict';
+const paikka = document.getElementById('target');
+let li = document.createElement('li');
+li.textContent = 'First item';
+paikka.appendChild(li);
+li = document.createElement('li');
+li.classList.add('my-item');
+li.textContent = 'Second item';
+paikka.appendChild(li);
+li = document.createElement('li');
+li.textContent = 'Third item';
+paikka.appendChild(li);
