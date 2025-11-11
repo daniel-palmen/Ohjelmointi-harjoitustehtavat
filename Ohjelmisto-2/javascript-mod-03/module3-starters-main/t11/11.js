@@ -100,10 +100,26 @@ for(let i=0;i<picArray.length;i++){
   article.innerHTML =`
    <h2>${picArray[i].title}</h2>
    <figure>
-      <img src=${picArray[i].image.medium} alt=${picArray[i].title}>
+      <img src=${picArray[i].image.medium} alt=${picArray[i].title} data-index=${i}>
       <figcaption>${picArray[i].caption}</figcaption>
    </figure>
    <p>${picArray[i].description}</p>
-  </article>`;
+   </article>`;
   paikka.appendChild(article);
 }
+const dialog = document.querySelector('dialog');
+const dialogImg = dialog.querySelector('img');
+const closeBtn = dialog.querySelector('span');
+
+paikka.addEventListener('click', (event) => {
+  const target = event.target;
+  if (target.tagName === 'IMG') {
+    const index = target.dataset.index;
+    dialogImg.src = picArray[index].image.large;
+    dialogImg.alt = picArray[index].title;
+    dialog.showModal();
+  }
+});
+closeBtn.addEventListener('click', () => {
+  dialog.close();
+});
