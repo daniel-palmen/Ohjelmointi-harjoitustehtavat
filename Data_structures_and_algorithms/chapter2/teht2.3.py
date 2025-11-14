@@ -278,9 +278,53 @@ class IntArray():
         self._resmem = new_resmem
         self.__setitem__(index, val)
 
-### IntArrat insert testi
+    def remove(self, index:int) -> int:
+        if index < 0 or index >= self._size:
+            raise IndexError("Index out of bounds")
+        removed = self.__getitem__(index)
+        old_bytes = self._size * self._bytes_per_element
+        new_size = self._size - 1
+        new_resmem = ReservedMemory(new_size*self._bytes_per_element)
+        remove_pos = index * self._bytes_per_element
+        right_start = remove_pos + self._bytes_per_element
+        right_count = old_bytes - right_start
+        new_resmem.copy(self._resmem, count=remove_pos, source_index=0, destination_index=0)
+
+        new_resmem.copy(
+            self._resmem,
+            count=right_count,
+            source_index=right_start,
+            destination_index=remove_pos)
+        self._resmem = new_resmem
+        self._size = new_size
+        return removed
+
+    def search(self, val):
+        index = -1
+        for i in range(self._size):
+            check = self.__getitem__(i)
+            if check == val:
+                index = i
+        return index
+
+### IntArray insert testi
 array = IntArray()
 for i in range(6):
     array.append(i)
 array.insert(5, 10)
 print(array)
+
+### IntArray remove testi
+
+array = IntArray()
+for i in range(6):
+    array.append(i)
+val = array.remove(3)
+print(val, array)
+
+### IntArray search testi
+
+array = IntArray()
+for i in range(6):
+    array.append(i+i)
+print(array.search(8))
