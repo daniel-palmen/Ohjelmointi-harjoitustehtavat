@@ -1,4 +1,4 @@
-class StackBasedQueue():
+class Queue():
     def __init__(self):
         self._InboundStack = []
         self._OutboundStack = []
@@ -8,7 +8,7 @@ class StackBasedQueue():
         plural = '' if self._size == 1 else 's'
         values = self._OutboundStack + self._InboundStack [::-1]
         return (
-        f'<StackBasedQueue ({self._size} element{plural}): '
+        f'<Queue ({self._size} element{plural}): '
         f'[{", ".join(values)}]>'
         )
 
@@ -26,3 +26,22 @@ class StackBasedQueue():
 
         self._size -= 1
         return self._OutboundStack.pop()
+
+def get_pairs(data):
+    evens = Queue()
+    odds = Queue()
+    result = []
+
+    for val in data:
+        if val % 2 == 0:
+            if odds._size > 0:
+                result.append((val, odds.dequeue()))
+            else:
+                evens.enqueue(val)
+        else:
+            if evens._size > 0:
+                result.append((evens.dequeue(), val))
+            else:
+                odds.enqueue(val)
+
+    return result

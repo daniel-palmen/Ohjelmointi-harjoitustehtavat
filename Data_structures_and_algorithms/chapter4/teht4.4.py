@@ -1,4 +1,4 @@
-class StackBasedQueue():
+class Queue():
     def __init__(self):
         self._InboundStack = []
         self._OutboundStack = []
@@ -8,7 +8,7 @@ class StackBasedQueue():
         plural = '' if self._size == 1 else 's'
         values = self._OutboundStack + self._InboundStack [::-1]
         return (
-        f'<StackBasedQueue ({self._size} element{plural}): '
+        f'<Queue ({self._size} element{plural}): '
         f'[{", ".join(values)}]>'
         )
 
