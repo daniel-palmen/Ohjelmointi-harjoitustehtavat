@@ -5,7 +5,7 @@ from time import sleep
 # Replace these values with your own
 SSID = "KME761_Group_4"
 PASSWORD = "Ryh4_sus_pw_4"
-BROKER_IP = "192.168.4.254"
+BROKER_IP = "192.168.4.253"
 PORT = 1883
 
 # Function to connect to WLAN

@@ -5,8 +5,8 @@ from umqtt.simple import MQTTClient
 # Replace these values with your own
 SSID = "KME761_Group_4"
 PASSWORD = "Ryh4_sus_pw_4"
-BROKER_IP = "192.168.4.254"
-PORT = 1883
+BROKER_IP = "192.168.4.253"
+PORT = 21883
 
 # Function to connect to WLAN
 def connect_wlan():
@@ -32,7 +32,6 @@ def connect_mqtt():
 if __name__ == "__main__":
     #Connect to WLAN
     connect_wlan()
-    
     # Connect to MQTT
     try:
         mqtt_client=connect_mqtt()
@@ -45,7 +44,7 @@ if __name__ == "__main__":
         while True:
             # Sending a message every 5 seconds.
             topic = "pico/test"
-            message = "Great job group X!"
+            message = "Great job group 4!"
             mqtt_client.publish(topic, message)
             print(f"Sending to MQTT: {topic} -> {message}")
             sleep(5)
