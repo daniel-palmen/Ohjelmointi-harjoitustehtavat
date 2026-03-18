@@ -38,18 +38,25 @@ def main():
                     led1.off()
                 else:
                     led1.on()
-                    oled.fill.rect
-                    oled.text(f'LED1 - {led1.state}', 8, 0, 1)
+                oled.fill_rect(8,0,80,8,0)
+                oled.text(f'LED1 - {led1.state}', 8, 0, 1)
+                oled.show()
             if chooser == 1:
                 if led2.brightness == 10:
                     led2.off()
                 else:
                     led2.on()
+                oled.fill_rect(8,8,80,8,0)
+                oled.text(f'LED2 - {led2.state}', 8, 8, 1)
+                oled.show()
             if chooser == 2:
                 if led3.brightness == 10:
                     led3.off()
                 else:
                     led3.on()
+                oled.fill_rect(8,16,80,8,0)
+                oled.text(f'LED3 - {led3.state}', 8, 16, 1)
+                oled.show()
 
         if rot.fifo.has_data():
             oled.text('[', 0, chooser * 8, 0)

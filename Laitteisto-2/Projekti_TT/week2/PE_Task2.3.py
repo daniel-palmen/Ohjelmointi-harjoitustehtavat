@@ -11,7 +11,7 @@ def main():
     oled_height = 64
     oled = SSD1306_I2C(oled_width, oled_height, i2c)
     oled.fill(0)
-    oled.text('Task 2.2', 0, 0, 1)
+    oled.text('Task 2.3', 0, 0, 1)
     oled.text('press SW1', 0, 8, 1)
     oled.show()
     while True:

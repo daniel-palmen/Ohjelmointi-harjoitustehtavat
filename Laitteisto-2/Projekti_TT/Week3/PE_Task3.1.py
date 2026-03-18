@@ -3,7 +3,7 @@ from fifo import Fifo
 from machine import UART, Pin, I2C, Timer, ADC, PWM
 from ssd1306 import SSD1306_I2C
 
-def main():           
+def main():
     rot = Encoder(10, 11, 12)
     led = Led(22)
     led.light.freq(1000)
