@@ -48,7 +48,7 @@ class Encoder:
     def handler(self, pin):
         if self.b():
             self.fifo.put(-1)
-        else:
+        elif self.a():
             self.fifo.put(1)
 
 class Led:

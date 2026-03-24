@@ -31,47 +31,44 @@ def main():
         led2.light.duty_u16(int(led2.brightness * 65535 / 255))
         led3.light.duty_u16(int(led3.brightness * 65535 / 255))
 
-        if rot.press() == 0:
-            time.sleep(0.2)
-            if chooser == 0:
-                if led1.brightness == 10:
-                    led1.off()
-                else:
-                    led1.on()
-                oled.fill_rect(8,0,80,8,0)
-                oled.text(f'LED1 - {led1.state}', 8, 0, 1)
-                oled.show()
-            if chooser == 1:
-                if led2.brightness == 10:
-                    led2.off()
-                else:
-                    led2.on()
-                oled.fill_rect(8,8,80,8,0)
-                oled.text(f'LED2 - {led2.state}', 8, 8, 1)
-                oled.show()
-            if chooser == 2:
-                if led3.brightness == 10:
-                    led3.off()
-                else:
-                    led3.on()
-                oled.fill_rect(8,16,80,8,0)
-                oled.text(f'LED3 - {led3.state}', 8, 16, 1)
-                oled.show()
-
         if rot.fifo.has_data():
             oled.text('[', 0, chooser * 8, 0)
             oled.text(']', 88, chooser * 8, 0)
             info = rot.fifo.get()
+            print(info)#testi
             if info == 1:
                 if chooser < 2:
                     chooser = chooser + 1
                 else:
                     chooser = 2
-            elif info == -1:
+            elif info == 2:
                 if chooser > 0:
                     chooser = chooser - 1
                 else:
                     chooser = 0
+            elif info == 3:
+                time.sleep(0.25)
+                if chooser == 0:
+                    if led1.brightness == 10:
+                        led1.off()
+                    else:
+                        led1.on()
+                    oled.fill_rect(8,0,80,8,0)
+                    oled.text(f'LED1 - {led1.state}', 8, 0, 1)
+                if chooser == 1:
+                    if led2.brightness == 10:
+                        led2.off()
+                    else:
+                        led2.on()
+                    oled.fill_rect(8,8,80,8,0)
+                    oled.text(f'LED2 - {led2.state}', 8, 8, 1)
+                if chooser == 2:
+                    if led3.brightness == 10:
+                        led3.off()
+                    else:
+                        led3.on()
+                    oled.fill_rect(8,16,80,8,0)
+                    oled.text(f'LED3 - {led3.state}', 8, 16, 1)
             oled.text('[', 0, chooser * 8, 1)
             oled.text(']', 88, chooser * 8, 1)
             oled.show()
@@ -79,14 +76,20 @@ class Encoder:
     def __init__(self, rot_a, rot_b, rot_press):
         self.a = Pin(rot_a, mode = Pin.IN)
         self.b = Pin(rot_b, mode = Pin.IN)
-        self.press = Pin(rot_press, Pin.IN, Pin.PULL_UP)
-        self.fifo = Fifo(30, typecode = 'i')
+        self.press = Pin(rot_press, mode = Pin.IN, pull = Pin.PULL_UP)
+        self.fifo = Fifo(30)
         self.a.irq(handler = self.handler, trigger = Pin.IRQ_RISING, hard = True)
+        self.press.irq(handler = self.handler_press, trigger = Pin.IRQ_FALLING, hard = True)
+
     def handler(self, pin):
         if self.b():
-            self.fifo.put(-1)
-        else:
+            self.fifo.put(2)
+        elif self.a():
             self.fifo.put(1)
+
+    def handler_press(self, pin):
+        if self.press():
+            self.fifo.put(3)
 
 class Led:
     def __init__(self, pin):
