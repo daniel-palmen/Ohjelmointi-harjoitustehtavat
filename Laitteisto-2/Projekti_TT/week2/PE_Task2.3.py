@@ -19,11 +19,11 @@ def main():
             time.sleep(0.1)
             oled.fill(0)
             threshold = thresholder(fifo)
-            print(f'threshold: {threshold}')
-            oled.text(f'threshold:{threshold}', 0, 0, 1)
-            frequency = round(freq_finder(fifo, threshold), 3)
-            print(f'frequency:{frequency}s')
-            oled.text(f'frequency:{frequency}s', 0, 8, 1)
+            print(f'Threshold: {threshold}')
+            oled.text(f'Threshold:{threshold}', 0, 0, 1)
+            frequency = round(freq_finder(fifo, threshold), 2)
+            print(f'Frequency:{frequency}Hz')
+            oled.text(f'Frequency:{frequency}Hz', 0, 8, 1)
             oled.show()
     return
 
@@ -46,22 +46,12 @@ def thresholder(fifo): #reads first 2 seconds and sets threshold
     threshold = int((data_max + data_min)/2)
     return threshold
 
-def freq_finder(fifo, threshold): #fix this shit
-    counter = 0
-    first = 0
+def freq_finder(fifo, threshold):
+    counter = 0 #laskee näytteiden määrää
+    first = 0 #tarvitaan etsimään ensimmäinen threshold alhaalta ylöspäin
     frequency = 0
-    times = 0
-    going_up = 0
-    for i in range(250*10):
-        if fifo.has_data():
-            data_new = fifo.get()
-            if data_new < threshold:
-                going_up = 1
-            if going_up == 1 and data_new > threshold:
-                if first == 0:
-                    first = 1
-
-    '''
+    times = 0 #kuinka monta kertaa mennään alhaalta suunnasta yli thresholdista
+    going_up = 0 #seuraavan thresholdin ylitys suunta
     for i in range(250*10):
             if fifo.has_data():
                 data_new = fifo.get()
@@ -69,16 +59,13 @@ def freq_finder(fifo, threshold): #fix this shit
                     counter = counter + 1
                 if data_new < threshold:
                     going_up = 1
-                    if first == 1:
-                        first = 0
                 elif going_up == 1 and data_new > threshold:
                     going_up = 0
                     if first == 1:
                         times = times + 1
                     else:
-                        first = 1
-    frequency = (counter / times) / 250
-    '''
+                        first = 1 #aloittaa countin vasta kun ensimmäisen kerran ylittää thresholdin
+    frequency = 250 / (counter / times)
     return frequency
 
 main()
