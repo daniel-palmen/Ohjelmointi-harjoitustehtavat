@@ -46,12 +46,22 @@ def thresholder(fifo): #reads first 2 seconds and sets threshold
     threshold = int((data_max + data_min)/2)
     return threshold
 
-def freq_finder(fifo, threshold):
+def freq_finder(fifo, threshold): #fix this shit
     counter = 0
     first = 0
     frequency = 0
     times = 0
     going_up = 0
+    for i in range(250*10):
+        if fifo.has_data():
+            data_new = fifo.get()
+            if data_new < threshold:
+                going_up = 1
+            if going_up == 1 and data_new > threshold:
+                if first == 0:
+                    first = 1
+
+    '''
     for i in range(250*10):
             if fifo.has_data():
                 data_new = fifo.get()
@@ -59,6 +69,8 @@ def freq_finder(fifo, threshold):
                     counter = counter + 1
                 if data_new < threshold:
                     going_up = 1
+                    if first == 1:
+                        first = 0
                 elif going_up == 1 and data_new > threshold:
                     going_up = 0
                     if first == 1:
@@ -66,6 +78,7 @@ def freq_finder(fifo, threshold):
                     else:
                         first = 1
     frequency = (counter / times) / 250
+    '''
     return frequency
 
 main()
