@@ -3,7 +3,7 @@ from fifo import Fifo
 from machine import UART, Pin, I2C, Timer, ADC, PWM
 from ssd1306 import SSD1306_I2C
 
-def main():           
+def main():       
     rot = Encoder(10, 11, 12)
     led1 = Led(22)
     led2 = Led(21)
@@ -72,6 +72,7 @@ def main():
             oled.text('[', 0, chooser * 8, 1)
             oled.text(']', 88, chooser * 8, 1)
             oled.show()
+
 class Encoder:
     def __init__(self, rot_a, rot_b, rot_press):
         self.a = Pin(rot_a, mode = Pin.IN)
