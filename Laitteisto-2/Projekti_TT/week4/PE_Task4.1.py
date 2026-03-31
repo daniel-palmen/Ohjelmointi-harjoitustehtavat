@@ -1,55 +1,36 @@
 from filefifo import Filefifo
 
 def main():
-    heart_rate = 0
-    row = 0
+    rate = 250
     fifo = Filefifo(10, name = 'hr_capture03_250Hz.txt')
-    row = file_reader(fifo, row)
-    print(f'this is rows: {row}')
-
-def file_reader(fifo, row): #read 10 sec of data
-    data_new = 0
-    data_max = 0
-    data_min = 0
-    data_setter = 0
-    counter = 0
-    times = 0
-    going_up = 0
-    frequency = 0
-    for i in range(250*10):
-        if fifo.has_data():
-            data_new = fifo.get()
-            if row < 250:
-                threshold, data_min, data_max, data_setter = thresholder(data_new, data_min, data_max, data_setter) #calculates threshold
-            elif row > 250:
-                threshold, data_min, data_max, data_setter = thresholder(data_new, data_min, data_max, data_setter) #calculates threshold
-                heart_rate = heart_rater(data_new, threshold, going_up, times, counter)
-            if frequency != 0 and row % 250 == 0:
-                print(f'this is freq: {frequency}')
-        row = row + 1
-    print('test1')
-    return row
-
-def thresholder(data_new, data_min, data_max, data_setter):
-    if data_setter == 0:
-        data_max = data_new
-        data_min = data_new
-        data_setter = 1
-    elif data_new > data_max:
-        data_max = data_new
-    elif data_new < data_min:
-        data_min = data_new
-    threshold = int((data_max + data_min)/2)
-    return threshold, data_min, data_max, data_setter
-
-def heart_rater(data_new, threshold, going_up, times, counter):
-    if data_new < threshold:
-        going_up = 1
-        times = 1
-    elif data_new > threshold:
-        going_up = 0
+    wanted = 20
+    first = 0
+    start_count = 0
+    sum_count = 0
+    nro_results = 0
+    if fifo.has_data():
+        data_A = fifo.get()
+        data_B = fifo.get()
     
+    while nro_results < wanted:
         
-    return heart_rate
-
+        for i in range(rate):
+            if fifo.has_data():
+                data_new = fifo.get()
+                if start_count == 1:
+                    sum_count += 1
+                if data_new < data_A and data_B < data_A:
+                    if first == 0:
+                        start_count = 1
+                        first = 1
+                    if first == 1:
+                        print(f'data_B{data_B} data_A{data_A} data_B{data_B} sum_count{sum_count}')
+                        
+                        print(f'heartrate{heartrate}')
+                        nro_results += 1
+                        first = 0
+                        sum_count = 0
+                data_B = data_A
+                data_A = data_new
+                    
 main()
