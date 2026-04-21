@@ -10,7 +10,7 @@ class isr_adc:
         self.av = ADC(adc_pin_nr)
         self.led = Led(led_pin_nr)
         self.fifo = Fifo(750)
-        self.factor = 0.85
+        self.factor = 0.50
         self.led.off()
         self.ppi = 0 #yksi väli
         self.MS_IN_MINUTE = 60000
@@ -89,9 +89,9 @@ while True:
         #print(value, th)
         fifo_counter += 1
         ia.ppi += 1
-#        if fifo_counter >= sample_rate * 2:
-#            th = ia.calculate_threshold()
-#            fifo_counter = 0
+        if fifo_counter >= sample_rate * 2:
+            th = ia.calculate_threshold()
+            fifo_counter = 0
         
         if value > th: #yli rajan
             if passed_th == False: #ensimmäinen ylitys
@@ -112,9 +112,9 @@ while True:
         prev_value = value
         
     if not rot.fifo.empty():
-        #ia.factor = ia.factor - rot.fifo.get() * 0.01
-        th = th - rot.fifo.get()*500
-        print(f'Threshold chaged to {th}')
-        #print(f'factor changed to {ia.factor:.2f}')
+        ia.factor = ia.factor - rot.fifo.get() * 0.01
+        #th = th - rot.fifo.get()*500
+        #print(f'Threshold chaged to {th}')
+        print(f'factor changed to {ia.factor:.2f}')
 
 #lisää liukuva keskiarvo ja rajat hr muutokselle ja ehkä hr muutoksen raja
